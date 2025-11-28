@@ -16,7 +16,7 @@ export default function Home() {
 
     try {
       // ⛔ This will work AFTER we build the backend at http://localhost:8000/scan
-      const res = await fetch("http://127.0.0.1:8000/scan", {
+      const res = await fetch("https://web-api-recon.onrender.com/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ target }),
