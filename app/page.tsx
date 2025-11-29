@@ -47,10 +47,10 @@ export default function Home() {
         <header className="header">
           <div>
             <h1 className="title">
-              <span className="accent">WEB</span> RECON PANEL
+              🧑‍💻 <span className="accent">WEB</span> RECON TERMINAL
             </h1>
             <p className="subtitle">
-              Lightweight OSINT / recon dashboard. Use only on authorized targets.
+              Lightweight OSINT / recon dashboard for ethical hacking & lab use only.
             </p>
           </div>
           <div className="header-status">
@@ -116,7 +116,7 @@ export default function Home() {
                 )}
                 {!loading && !result && (
                   <div className="log-muted">
-                    &gt; waiting for target…
+                    &gt; waiting for target<span className="cursor">_</span>
                   </div>
                 )}
               </div>
@@ -311,6 +311,16 @@ export default function Home() {
             </div>
           </section>
         )}
+
+        {/* Footer */}
+        <footer className="footer">
+          <span className="footer-left">
+            ⚠ For educational use. Scan only hosts you have permission to test.
+          </span>
+          <span className="footer-right">
+            Built by <span className="accent">B5</span> · Cybersec Recon 🛡️
+          </span>
+        </footer>
       </div>
 
       {/* Global styles for the “hacker” vibe */}
@@ -541,11 +551,12 @@ export default function Home() {
           border-radius: 10px;
           background: radial-gradient(
               circle at top left,
-              rgba(0, 255, 157, 0.12),
-              transparent 50%
+              rgba(0, 255, 157, 0.14),
+              transparent 55%
             ),
-            rgba(15, 23, 42, 0.9);
-          border: 1px solid rgba(15, 23, 42, 0.9);
+            rgba(6, 12, 22, 0.96);
+          border: 1px solid rgba(0, 255, 157, 0.25);
+          box-shadow: 0 0 18px rgba(0, 255, 157, 0.25);
           overflow: hidden;
           font-size: 11px;
         }
@@ -565,10 +576,33 @@ export default function Home() {
             Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
             monospace;
           color: #cbd5f5;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .log-body::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(
+            to bottom,
+            rgba(15, 23, 42, 0),
+            rgba(15, 23, 42, 0) 2px,
+            rgba(15, 23, 42, 0.35) 3px
+          );
+          mix-blend-mode: soft-light;
+          pointer-events: none;
         }
 
         .log-muted {
           color: #64748b;
+        }
+
+        .cursor {
+          display: inline-block;
+          width: 6px;
+          margin-left: 2px;
+          animation: blink 1s steps(2, start) infinite;
         }
 
         .results-grid {
@@ -770,6 +804,29 @@ export default function Home() {
           color: #f97373;
         }
 
+        .footer {
+          margin-top: 18px;
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          font-size: 11px;
+          color: #64748b;
+        }
+
+        .footer-right {
+          text-align: right;
+        }
+
+        @media (max-width: 768px) {
+          .footer {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .footer-right {
+            text-align: left;
+          }
+        }
+
         .fade-in {
           animation: fadeIn 0.4s ease-out;
         }
@@ -805,6 +862,17 @@ export default function Home() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @keyframes blink {
+          0%,
+          50% {
+            opacity: 1;
+          }
+          50.01%,
+          100% {
+            opacity: 0;
           }
         }
       `}</style>
